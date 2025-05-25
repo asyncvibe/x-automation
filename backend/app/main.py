@@ -3,7 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from beanie import init_beanie
 from motor.motor_asyncio import AsyncIOMotorClient
 from app.models.product import Product
-from app.routers import product
+from app.routers import product, automation
 import os
 
 app = FastAPI()
@@ -22,3 +22,4 @@ async def startup_db():
     await init_beanie(database=client["mydatabase"], document_models=[Product])
 
 app.include_router(product.router)
+app.include_router(automation.router)
